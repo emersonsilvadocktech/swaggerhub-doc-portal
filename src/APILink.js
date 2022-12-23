@@ -3,7 +3,7 @@ import React from 'react';
 
 const APILink = props => {
     let name = props.apiLinkData.name
-    let apiLink = props.apiLinkData.properties[0].url
+    let apiLink = props.apiLinkData.url
 
     function handleClick() {
       props.updateDefinitionLink(apiLink)

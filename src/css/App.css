@@ -44,6 +44,11 @@
   border-radius: 0;
 }
 
+.swagger-ui .opblock-summary-control {
+  display: flex;
+  background-color: #0B1D33;
+}
+
 .swagger-ui .opblock .opblock-summary-path {
   color: white;
 }

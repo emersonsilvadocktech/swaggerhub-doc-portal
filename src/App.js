@@ -3,59 +3,62 @@ import SwaggerUI from 'swagger-ui-react';
 import Config from './organization_config.json';
 import Sidebar from './Sidebar.js'
 
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
         organizationConfig: null,
-        definitionList: null,
-        definitionLink: "https://petstore.swagger.io/v2/swagger.json"
+        definitionList: [],
+        definitionLink: {},
+        baseUrl: "localhost:3000",
+        lastDefinitionLink: null,
       }
-      this.swaggerhub = this.swaggerhub.bind(this)
       this.getOrganizationData = this.getOrganizationData.bind(this)
       this.updateDefinitionLink = this.updateDefinitionLink.bind(this)
+      this.updateBaseUrl = this.updateBaseUrl.bind(this)
+      this.updateNewBaseUrl = this.updateNewBaseUrl.bind(this)
     }
 
   componentWillMount() {
     this.setState({
       organizationConfig:  Config.orgData,
     })
-  }
 
-  swaggerhub(inputMethod, inputResource, inputParams) {
-    let url = ""
-    if (inputParams) {
-      url = "https://api.swaggerhub.com/apis/" + inputResource + "?" + inputParams
-    } else {
-      url = "https://api.swaggerhub.com/apis/" + inputResource
-    }
-    
-    return fetch(url, {
-        method: inputMethod
-    }).then(response => {
-      if (response.ok) {
-        return response.json()
-      } throw new Error('There was an issue requesting the API')
-    }).then(json => {
-      return json
-    })
+    this.updateDefinitionLink(Config.orgData.apis.filter(a => a.default)[0].url);
   }
 
   getOrganizationData(organization) {
-    let inputParams = "page=0&limit=10&sort=NAME&order=ASC"
-    let inputResource = organization;
-  
-    this.swaggerhub('GET', inputResource, inputParams).then(response => {
-      this.setState({
-        definitionList: response.apis
-      })
-    })
+    this.setState({
+      definitionList: organization.apis,
+    });
   }
 
   updateDefinitionLink(newLink) {
-    this.setState({
-      definitionLink: newLink
+    return fetch(newLink, {
+        method: 'get'
+    }).then(async response => {
+      if (response.ok) {
+        let response_json = await response.json()
+        response_json.host = this.state.baseUrl
+        this.setState({
+          definitionLink: response_json,
+          lastDefinitionLink: newLink
+        });
+        return;
+      } 
+      throw new Error('There was an issue requesting the API')
     })
+  }
+
+  updateBaseUrl(event) {
+    this.setState({
+      baseUrl: event.target.value
+    })
+  }
+
+  updateNewBaseUrl() {
+    this.updateDefinitionLink(this.state.lastDefinitionLink);
   }
 
   render() {
@@ -69,8 +72,13 @@ class App extends Component {
         />
         
         <div id="api-data">
+          <div>
+            <input type="text" value={this.state.baseUrl} style={{ width: 300 }} onChange={this.updateBaseUrl} />
+            <button onClick={this.updateNewBaseUrl}>Atualizar</button>
+          </div>
+
           <SwaggerUI 
-            url={this.state.definitionLink}
+            spec={this.state.definitionLink}
             docExpansion="list"
           />
         </div>

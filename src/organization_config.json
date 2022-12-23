@@ -1,8 +1,50 @@
 {
     "orgData": {
-        "orgName": "The_Empire",
-        "displayName": "The Galactic Empire",
-        "displayTag": "Home of the Galaxies Greatest APIs",
-        "displayImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Emblem_of_the_First_Galactic_Empire.svg/220px-Emblem_of_the_First_Galactic_Empire.svg.png"
+        "orgName": "Dock Tech",
+        "displayName": "Capana APIs",
+        "displayTag": "List of Capana's APIs.",
+        "apis": [
+            {
+                "name": "Autenticação",
+                "url": "/api-docs/autenticacao.json",
+                "default": true
+            },
+            {
+                "name": "Gerencial",
+                "url": "/api-docs/gerencial.json"
+            },
+            {
+                "name": "Coleta",
+                "url": "/api-docs/coleta.json"
+            },
+            {
+                "name": "Fluxo",
+                "url": "/api-docs/fluxo.json"
+            },
+            {
+                "name": "Proposta",
+                "url": "/api-docs/proposta.json"
+            },
+            {
+                "name": "Relatório",
+                "url": "/api-docs/relatorio.json"
+            },
+            {
+                "name": "Arquivo",
+                "url": "/api-docs/arquivo.json"
+            },
+            {
+                "name": "Adesão",
+                "url": "/api-docs/adesao.json"
+            },
+            {
+                "name": "Mesa",
+                "url": "/api-docs/mesa.json"
+            },
+            {
+                "name": "Neurotech",
+                "url": "/api-docs/neurotech.json"
+            }
+        ]
     }
 }

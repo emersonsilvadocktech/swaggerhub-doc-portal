@@ -5,26 +5,34 @@ const Sidebar = props => {
     let organizationConfig = props.organizationConfig
     let apiLinks = []
 
-    if (props.definitionList === null) {
-        props.getOrganizationData(organizationConfig.orgName)
-    } else {
-        for (let i = 0; i < props.definitionList.length; i++) {
-            if (props.definitionList[i].properties[4].value === "true") {
-                apiLinks.push(
-                    <APILink 
-                        key={i}
-                        apiLinkData={props.definitionList[i]}
-                        updateDefinitionLink={props.updateDefinitionLink}
-                    />
-                )
-            }
-        }
+    for (let i = 0; i < organizationConfig.apis.length; i++) {
+        apiLinks.push(
+            <APILink 
+                key={i}
+                apiLinkData={organizationConfig.apis[i]}
+                updateDefinitionLink={props.updateDefinitionLink}
+            />
+        )
     }
+    // if (!props.definitionList) {
+    //     props.getOrganizationData(organizationConfig.orgName)
+    // } else {
+    //     for (let i = 0; i < props.definitionList.length; i++) {
+    //         if (props.definitionList[i].default === true) {
+    //             apiLinks.push(
+    //                 <APILink 
+    //                     key={i}
+    //                     apiLinkData={props.definitionList[i]}
+    //                     updateDefinitionLink={props.updateDefinitionLink}
+    //                 />
+    //             )
+    //         }
+    //     }
+    // }
 
   return (
     <div className="side-bar">
         <div className="side-bar-header">
-            <img src={organizationConfig.displayImage} alt="logo"/>
             <h1>{organizationConfig.displayName}</h1>
             <h3>{organizationConfig.displayTag}</h3>
         </div>

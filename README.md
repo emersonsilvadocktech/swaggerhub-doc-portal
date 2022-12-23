@@ -2,18 +2,15 @@
 
 ![SwaggerHub_gif](https://i.imgur.com/YAkrYRo.gif)
 
-## INFO
+## USE (Recomended)
 
-Template project for building a React front end over the Swaggerhub API. This repository is intended as a starting point for those looking to develop a custom, swagger/OAS driven portal.
+- `clone repository`
+- `cd`
+- `docker-compose up -d --no-deps --build swagger`
 
-Documentation and full tutorial can be found at the links below: 
-- Part 1: https://swagger.io/blog/api-documentation/building-documentation-portal-swagger-tutorial/
-- Part 2: https://swagger.io/blog/api-documentation/building-a-documentation-portal-for-multiple-apis/
+## Or USE 
 
-An example of the site can be found at: https://empire-doc-portal.netlify.com/
-
-## USE
-
+- `install node 12.x`
 - `clone repository`
 - `cd`
 - `npm install`
